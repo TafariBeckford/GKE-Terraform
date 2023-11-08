@@ -23,3 +23,5 @@ steps:
     - -c
     - |
         terraform -chdir=./networking apply -auto-approve && terraform -chdir=./cluster apply -auto-approve
+options:
+  logging: CLOUD_LOGGING_ONLY
