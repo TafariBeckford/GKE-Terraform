@@ -6,7 +6,10 @@ steps:
     args:
     - -c
     - |
-        terraform -chdir=./networking init && terraform -chdir=./cluster init
+        if [ -d ./networking] && [ -d ./cluster] ; then
+          terraform -chdir=./networking init && terraform -chdir=./cluster init
+        fi 
+
 
   - id: 'tf plan' 
     name: 'hashicorp/terraform:1.6'
@@ -14,7 +17,9 @@ steps:
     args:
     - -c
     - |
-        terraform -chdir=./networking plan && terraform -chdir=./cluster plan
+          if [ -d ./networking] && [ -d ./cluster] ; then
+            terraform -chdir=./networking plan && terraform -chdir=./cluster plan
+          fi
 
   - id: 'tf apply' 
     name: 'hashicorp/terraform:1.6'
@@ -22,6 +27,8 @@ steps:
     args:
     - -c
     - |
-        terraform -chdir=./networking apply -auto-approve && terraform -chdir=./cluster apply -auto-approve
+        if [ -d ./networking] && [ -d ./cluster] ; then
+          terraform -chdir=./networking apply -auto-approve && terraform -chdir=./cluster apply -auto-approve
+        fi
 options:
   logging: CLOUD_LOGGING_ONLY
