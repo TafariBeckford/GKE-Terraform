@@ -6,7 +6,7 @@ steps:
     args:
     - -c
     - |
-        if [ -d ./networking] && [ -d ./cluster] ; then
+        if [ -d ./networking ] && [ -d ./cluster ] ; then
           terraform -chdir=./networking init && terraform -chdir=./cluster init
         fi 
 
@@ -17,7 +17,7 @@ steps:
     args:
     - -c
     - |
-          if [ -d ./networking] && [ -d ./cluster] ; then
+          if [ -d ./networking ] && [ -d ./cluster ] ; then
             terraform -chdir=./networking plan && terraform -chdir=./cluster plan
           fi
 
@@ -27,7 +27,7 @@ steps:
     args:
     - -c
     - |
-        if [ -d ./networking] && [ -d ./cluster] ; then
+        if [ -d ./networking ] && [ -d ./cluster ] ; then
           terraform -chdir=./networking apply -auto-approve && terraform -chdir=./cluster apply -auto-approve
         fi
 options:
