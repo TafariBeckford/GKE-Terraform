@@ -1,0 +1,12 @@
+steps:
+  - id: 'terraform destroy'
+    name: 'hashicorp/terraform:1.6'
+    entrypoint: sh
+    args:
+      - -c
+      - |
+           if [ -d ./networking ] && [ -d ./cluster ]; then
+             terraform -chdir=./networking destroy -auto-approve && terraform -chdir=./cluster destroy -auto-approve
+           fi 
+options:
+  logging: CLOUD_LOGGING_ONLY
