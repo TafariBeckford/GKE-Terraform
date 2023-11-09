@@ -1,8 +1,18 @@
 steps:
-  - id: 'terraform destroy'
-    name: 'hashicorp/terraform:1.6'
-    entrypoint: sh
-    args:
+ - id: 'terraform init'
+   name: 'hashicorp/terraform:1.6'
+   entrypoint: sh
+   args:
+      - -c
+      - |
+           if [ -d ./networking ] && [ -d ./cluster ]; then
+             terraform -chdir=./networking init && terraform -chdir=./cluster init
+           fi 
+
+ - id: 'terraform destroy'
+   name: 'hashicorp/terraform:1.6'
+   entrypoint: sh
+   args:
       - -c
       - |
            if [ -d ./networking ] && [ -d ./cluster ]; then
