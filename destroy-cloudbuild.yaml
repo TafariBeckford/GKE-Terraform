@@ -16,7 +16,7 @@ steps:
       - -c
       - |
            if [ -d ./networking ] && [ -d ./cluster ]; then
-             terraform -chdir=./networking destroy -auto-approve && terraform -chdir=./cluster destroy -auto-approve
+            terraform -chdir=./cluster destroy -auto-approve && terraform -chdir=./networking destroy -auto-approve 
            fi 
 options:
   logging: CLOUD_LOGGING_ONLY
